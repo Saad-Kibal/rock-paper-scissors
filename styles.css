@@ -123,7 +123,7 @@ h1 span {
 }
 
 .reset:active {
-    border: 3px solid white;
+    border: 3px solid #fff;
 }
 
 @media (max-width:600px) {
@@ -158,11 +158,11 @@ h1 span {
     }
     
     .results p {
-        padding: 10px;
         font-size: 1.2rem;
-        display:flex;
-        justify-content: space-between;
-        align-items: center;
+    }
+    .results p:last-of-type {
+        font-size: 1.2em;
+
     }
     
     .results img {
