@@ -158,11 +158,11 @@ h1 span {
     }
     
     .results p {
-        font-size: 1.2rem;
+        font-size: 0.8em;
     }
-    .results p:last-of-type {
-        font-size: 1.2em;
 
+    .results p:last-of-type {
+        font-size: 0.8em;
     }
     
     .results img {
@@ -173,6 +173,4 @@ h1 span {
     .reset {
         padding: 10px 20px;
     }
-    
-
 }
