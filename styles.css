@@ -49,6 +49,7 @@ h1 span {
     border: 2px solid white;
     border-radius: 100px;
     cursor: pointer;
+    outline: none;
 }
 
 .select::after {
@@ -77,6 +78,7 @@ h1 span {
     filter: brightness(0) saturate(100%) invert(19%) sepia(76%) saturate(6565%) hue-rotate(356deg) brightness(91%) contrast(90%);
     width: 100px;
     height: auto;
+    outline: none;
     transition: transform 0.3s ease ;
 }
 
