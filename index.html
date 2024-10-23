@@ -14,20 +14,22 @@
         <p>ties : 0</p>
     </div>
     <div class="buttons">
-        <button onclick="playgame('paper')" class="select">
+        <button onclick="playGame('paper')" class="select">
             <img src="./images/hand-paper.svg" alt="paper">
         </button>
-        <button onclick="playgame('rock')" class="select">
+        <button onclick="playGame('rock')" class="select">
             <img src="./images/hand-rock.svg" alt="rock">
         </button>
-        <button onclick="playgame('scissors')" class="select">
+        <button onclick="playGame('scissors')" class="select">
             <img src="./images/hand-scissors.svg" alt="scissors">
         </button> 
     </div>
     <div class="results"></div>
     <button onclick="score.wins = 0 ; score.losses = 0 ; score.ties = 0;
     localStorage.removeItem('score');
-    updateScoreElement ()" class="reset">reset score</button>
+    updateScoreElement ()" class="reset">Play again</button>
+
+    
     <script src="script.js"></script>
     
 </body>

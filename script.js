@@ -1,65 +1,64 @@
 const scoreElement = document.querySelector('.score-table');
-const result = document.querySelector('.results')
-let results='';
+const resultElement = document.querySelector('.results');
 let score = JSON.parse(localStorage.getItem('score')) || {
-    wins : 0 , losses : 0 , ties : 0
+  wins: 0,
+  losses: 0,
+  ties: 0
 };
 
-updateScoreElement();
-
-
-
 function pickComputerMove(rng) {
-    let ComputerMove;
-
-    if (rng >= 0 && rng < 1 / 3) {
-        ComputerMove = 'paper'
-    }
-    else if (rng >=1 / 3 && rng < 2 / 3) {
-        ComputerMove = 'rock'
-    }
-    else if (rng > 2 / 3 && rng < 1) {
-        ComputerMove = 'scissors'
-    }
-    return ComputerMove;
+  let computerMove;
+  if (rng === 1) {
+    computerMove = 'paper';
+  } else if (rng === 2) {
+    computerMove = 'rock';
+  } else if (rng === 3) {
+    computerMove = 'scissors';
+  }
+  return computerMove;
 }
 
-function playgame(move) {
-    const rng = Math.random();
-    const ComputerMove = pickComputerMove(rng);
+function playGame(move) {
+  const computerMove = pickComputerMove(Math.floor(Math.random() * 3) + 1);
+  let result;
 
-    if ( (move === 'paper' && ComputerMove ==='rock')
-           ||(move === 'rock' && ComputerMove === 'scissors')
-           ||(move === 'scissors' && ComputerMove === 'paper')) {
-               results='you win!!';
-               score.wins += 1      
-    }
-    else if (move === ComputerMove) {
-        results='its a tie';
-        score.ties += 1 
-
-    }
-    else {
-        results='you lose'
-        score.losses += 1 
-    }
-
-    localStorage.setItem('score' , JSON.stringify(score));
+  if (beats(move, computerMove)) {
+    result = 'You win!';
+    score.wins ++;
+  } else if (move === computerMove) {
+    result = 'It\'s a tie.';
+    score.ties ++;
+  } else {
+    result = 'You lose.';
+    score.losses ++;
+  }
 
 
-
-
-    updateScoreElement ();
-
-    result.innerHTML=`<p>You choose: <img src="./images/hand-${move}.svg" alt="${move}"></p>
-        <p>Computer chose: <img src="./images/hand-${ComputerMove}.svg" alt="${ComputerMove}"></p>
-        <p>${results}</p>`
-
+  localStorage.setItem('score', JSON.stringify(score));
+  updateScoreElement();
+  resultElement.innerHTML = `
+    <p>You chose: <img src="./images/hand-${move}.svg" alt="${move}"></p>
+    <p>Computer chose: <img src="./images/hand-${computerMove}.svg" alt="${computerMove}"></p>
+    <p>${result}</p>
+  `;
+  if (score.wins >= 5) {
+    scoreElement.innerHTML = 'Congratulations! You won the round!';
+  } else if (score.losses >= 5) {
+    scoreElement.innerHTML = 'Sorry, you lost the game.';
+  }
 }
 
-function updateScoreElement () {
-    scoreElement.innerHTML=`<p>player : ${score.wins} </p>
-        <p>computer : ${score.losses} </p>
-        <p>ties : ${score.ties}</p>`;
+function beats(playerMove, computerMove) {
+  return (playerMove === 'paper' && computerMove === 'rock') ||
+    (playerMove === 'rock' && computerMove === 'scissors') ||
+    (playerMove === 'scissors' && computerMove === 'paper');
+}
+
+function updateScoreElement() {
+  scoreElement.innerHTML = `
+    <p>player : ${score.wins} </p>
+    <p>computer : ${score.losses} </p>
+    <p>ties : ${score.ties}</p>
+  `;
 }
 
